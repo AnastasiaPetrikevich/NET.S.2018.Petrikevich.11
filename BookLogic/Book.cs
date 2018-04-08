@@ -15,26 +15,32 @@ namespace BookLogic
         /// ISBN.
         /// </summary>
         private string isbn;
+
         /// <summary>
         /// Author name.
         /// </summary>
         private string authorName;
+
         /// <summary>
         /// Book title.
         /// </summary>
         private string title;
+
         /// <summary>
         /// Publishing house.
         /// </summary>
         private string publisher;
+
         /// <summary>
         /// Year of publication
         /// </summary>
         private int year;
+
         /// <summary>
         /// Number of pages.
         /// </summary>
-        private int numberOfPages;
+        private int numberOfPages;   
+        
         /// <summary>
         ///Book price.
         /// </summary>
@@ -48,7 +54,7 @@ namespace BookLogic
         public string ISBN
         {
             get => isbn;
-            set
+            internal set
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
@@ -72,7 +78,7 @@ namespace BookLogic
         public string AuthorName
         {
             get => authorName;
-            set
+            internal set
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
@@ -89,7 +95,7 @@ namespace BookLogic
         public string Title
         {
             get => title;
-            set
+           internal  set
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
@@ -106,7 +112,7 @@ namespace BookLogic
         public string Publisher
         {
             get => publisher;
-            set
+            internal set
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
@@ -123,7 +129,7 @@ namespace BookLogic
         public int Year
         {
             get => year;
-            set
+            internal set
             {
                 if (value < 0 || value > DateTime.Today.Year)
                 {
@@ -140,7 +146,7 @@ namespace BookLogic
         public int NumberOfPages
         {
             get => numberOfPages;
-            set
+            internal set
             {
                 if (value < 0)
                 {
@@ -157,7 +163,7 @@ namespace BookLogic
         public decimal Price
         {
             get => price;
-            set
+            internal set
             {
                 if (value < 0)
                 {
@@ -283,7 +289,7 @@ namespace BookLogic
         #region IFormattable
 
         /// <summary>
-        /// IIFormattable ToString
+        /// IIFormattable ToString()
         /// </summary>
         /// <param name="format">Type of format.</param>
         /// <param name="formatProvider"> Format provider.</param>

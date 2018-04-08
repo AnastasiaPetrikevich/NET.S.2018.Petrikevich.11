@@ -8,6 +8,9 @@ using BookLogic;
 
 namespace BookFormatter
 {
+    /// <summary>
+    /// Containsadditional methods for Book representation.
+    /// </summary>
     public class BookFormat : IFormatProvider, ICustomFormatter
     {
         public object GetFormat(Type formatType)
@@ -40,13 +43,14 @@ namespace BookFormatter
             }
             
 
-            string result = null;
-
             switch (format)
             {
                 case "IAT":
-                    result = book.ToString("IAT", null);
-                    break;
+                    return $"{book.ISBN}, {book.ToString("AT", null)}";
+                  
+                case "ATY":
+                   return $"{book.ToString("AT", null)}, {book.Year.ToString(formatProvider)}";
+                   
                 default:
                     try
                     {
@@ -59,7 +63,7 @@ namespace BookFormatter
                     break;
             }
 
-            return result;
+            return book.ToString();
         }
 
         private string HandleOtherFormats(string format, object arg)
@@ -73,6 +77,7 @@ namespace BookFormatter
             {
                 return arg.ToString();
             }
+
             return String.Empty;
         }
     }

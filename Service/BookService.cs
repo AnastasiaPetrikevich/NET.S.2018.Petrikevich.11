@@ -16,12 +16,7 @@ namespace Service
         /// List of Book.
         /// </summary>
         private List<Book> books = new List<Book>();
-
-        /// <summary>
-        /// Books storage.
-        /// </summary>
-        private readonly IBookListStorage storage;
-
+        
         /// <summary>
         /// Logger.
         /// </summary>
@@ -30,16 +25,15 @@ namespace Service
         /// <summary>
         /// Constructor
         /// </summary>
-        public BookService(ILogger logger, IBookListStorage storage)
+        public BookService(ILogger logger)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            this.storage = storage ?? new BookListStorage(@"storage.bin");
         }
 
         /// <summary>
         /// Constructor
         /// </summary>
-        public BookService(IEnumerable<Book> books, ILogger logger, IBookListStorage storage) : this(logger, storage)
+        public BookService(IEnumerable<Book> books, ILogger logger) : this(logger)
         {
             foreach (Book book in books)
             {
@@ -48,11 +42,11 @@ namespace Service
         }
 
         /// <summary>
-        /// Add book to BooksListServise
+        /// Add book to the list of books.
         /// </summary>
-        /// <param name="book">Book to be added</param>
-        /// <exception cref="ArgumentNullException">Argument must not be null</exception>
-        /// <exception cref="InvalidOperationException">This book is already exist in BookListServide</exception>
+        /// <param name="book">Book to be added.</param>
+        /// <exception cref="ArgumentNullException">Argument must not be null.</exception>
+        /// <exception cref="InvalidOperationException">This book is already exist in list.</exception>
         public void AddBook(Book book)
         {
             if (book == null)
@@ -70,11 +64,11 @@ namespace Service
         }
 
         /// <summary>
-        /// Remove book from BookListServie
+        /// Remove book from the list of books.
         /// </summary>
-        /// <param name="book">book to be removed</param>
-        /// <exception cref="ArgumentNullException">Argument must not be null</exception>
-        /// <exception cref="InvalidOperationException">No such element in BookListServide</exception>
+        /// <param name="book">Book to be removed.</param>
+        /// <exception cref="ArgumentNullException">Argument must not be null.</exception>
+        /// <exception cref="InvalidOperationException">No such element in list.</exception>
         public void RemoveBook(Book book)
         {
             if (book == null)
@@ -102,7 +96,7 @@ namespace Service
         /// Find book by tag.
         /// </summary> 
         /// <param name="predicate"> Tag by which fiding.</param>
-        /// <exception cref="ArgumentNullException">Argument must not be null</exception>
+        /// <exception cref="ArgumentNullException">Argument must not be null.</exception>
         /// <returns>List of found books.</returns>
         public IEnumerable<Book> FindBookByTag(IPredicate<Book> predicate)
         {
@@ -134,11 +128,11 @@ namespace Service
         /// </summary>
         /// <param name="storage">Storage provider</param>
         /// <exception cref="ArgumentNullException">Argument must not be null</exception>
-        public void SaveToStorage()
+        public void SaveToStorage(IBookListStorage storage)
         {
             if (storage == null)
             {
-                throw new ArgumentNullException($"{nameof(storage)} must not be null");
+                throw new ArgumentNullException(nameof(storage));
             }
 
             storage.Save(books);
@@ -155,7 +149,7 @@ namespace Service
         {
             if (storage == null)
             {
-                throw new ArgumentNullException($"{nameof(storage)} must not be null");
+                throw new ArgumentNullException(nameof(storage));
 
             }
 
